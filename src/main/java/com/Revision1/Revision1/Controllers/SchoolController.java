@@ -8,11 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.Revision1.Revision1.Entities.Subject;
 import com.Revision1.Revision1.Entities.Teacher1;
+import com.Revision1.Revision1.Exceptions.NotFoundException;
 @RestController
 public class SchoolController {
 	
@@ -31,5 +33,14 @@ public class SchoolController {
 	public List<Subject> getAllSubs()
 	{
 		return so.getAllSubs();
+	}
+	
+	@RequestMapping(method=RequestMethod.GET , path="/subjects/{id}")
+	public Subject getSubjectById(@RequestParam int id)
+	{
+		Subject s=so.getSubjectById(id);
+		if(s==null)
+		throw new NotFoundException(id+" Not Found");
+		return s;
 	}
 }

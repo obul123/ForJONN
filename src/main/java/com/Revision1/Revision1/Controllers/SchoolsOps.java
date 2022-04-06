@@ -1,6 +1,7 @@
 package com.Revision1.Revision1.Controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,6 +28,15 @@ public class SchoolsOps {
 	public List<Subject> getAllSubs() {
 		
 		return sr.findAll();
+	}
+
+	public Subject getSubjectById(int id) {
+		// TODO Auto-generated method stub
+		Optional<Subject> s=sr.findById(id);
+		if(s.isEmpty())
+		return null;
+		else 
+			return s.get();
 	}
 
 }
